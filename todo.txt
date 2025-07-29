@@ -1,0 +1,17 @@
+(tabs)
+- home
+- account
+- more
+
+screens
+- currency-list
+
+
+
+
+
+
+
+
+
+
