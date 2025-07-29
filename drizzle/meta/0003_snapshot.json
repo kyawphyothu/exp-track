@@ -1,8 +1,8 @@
 {
+  "id": "ded22ee2-dff4-4c9d-9534-98b05021e316",
+  "prevId": "a85213dd-4c1f-49a2-ba28-e3625957bce4",
   "version": "6",
   "dialect": "sqlite",
-  "id": "ff189246-19ba-4872-8deb-432d4baaccdc",
-  "prevId": "00000000-0000-0000-0000-000000000000",
   "tables": {
     "account_categories": {
       "name": "account_categories",
@@ -79,28 +79,28 @@
         "accounts_category_id_account_categories_id_fk": {
           "name": "accounts_category_id_account_categories_id_fk",
           "tableFrom": "accounts",
-          "tableTo": "account_categories",
           "columnsFrom": [
             "category_id"
           ],
+          "tableTo": "account_categories",
           "columnsTo": [
             "id"
           ],
-          "onDelete": "no action",
-          "onUpdate": "no action"
+          "onUpdate": "no action",
+          "onDelete": "no action"
         },
         "accounts_currency_id_currencies_id_fk": {
           "name": "accounts_currency_id_currencies_id_fk",
           "tableFrom": "accounts",
-          "tableTo": "currencies",
           "columnsFrom": [
             "currency_id"
           ],
+          "tableTo": "currencies",
           "columnsTo": [
             "id"
           ],
-          "onDelete": "no action",
-          "onUpdate": "no action"
+          "onUpdate": "no action",
+          "onDelete": "no action"
         }
       },
       "compositePrimaryKeys": {},
@@ -242,28 +242,28 @@
         "expenses_account_id_accounts_id_fk": {
           "name": "expenses_account_id_accounts_id_fk",
           "tableFrom": "expenses",
-          "tableTo": "accounts",
           "columnsFrom": [
             "account_id"
           ],
+          "tableTo": "accounts",
           "columnsTo": [
             "id"
           ],
-          "onDelete": "no action",
-          "onUpdate": "no action"
+          "onUpdate": "no action",
+          "onDelete": "no action"
         },
         "expenses_category_id_expense_categories_id_fk": {
           "name": "expenses_category_id_expense_categories_id_fk",
           "tableFrom": "expenses",
-          "tableTo": "expense_categories",
           "columnsFrom": [
             "category_id"
           ],
+          "tableTo": "expense_categories",
           "columnsTo": [
             "id"
           ],
-          "onDelete": "no action",
-          "onUpdate": "no action"
+          "onUpdate": "no action",
+          "onDelete": "no action"
         }
       },
       "compositePrimaryKeys": {},
@@ -352,28 +352,28 @@
         "incomes_account_id_accounts_id_fk": {
           "name": "incomes_account_id_accounts_id_fk",
           "tableFrom": "incomes",
-          "tableTo": "accounts",
           "columnsFrom": [
             "account_id"
           ],
+          "tableTo": "accounts",
           "columnsTo": [
             "id"
           ],
-          "onDelete": "no action",
-          "onUpdate": "no action"
+          "onUpdate": "no action",
+          "onDelete": "no action"
         },
         "incomes_category_id_income_categories_id_fk": {
           "name": "incomes_category_id_income_categories_id_fk",
           "tableFrom": "incomes",
-          "tableTo": "income_categories",
           "columnsFrom": [
             "category_id"
           ],
+          "tableTo": "income_categories",
           "columnsTo": [
             "id"
           ],
-          "onDelete": "no action",
-          "onUpdate": "no action"
+          "onUpdate": "no action",
+          "onDelete": "no action"
         }
       },
       "compositePrimaryKeys": {},
@@ -384,9 +384,9 @@
   "views": {},
   "enums": {},
   "_meta": {
+    "columns": {},
     "schemas": {},
-    "tables": {},
-    "columns": {}
+    "tables": {}
   },
   "internal": {
     "indexes": {}
