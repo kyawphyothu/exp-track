@@ -4,9 +4,22 @@ import { Stack } from 'expo-router';
 import { StatusBar } from 'expo-status-bar';
 import 'react-native-reanimated';
 
+import { DatabaseProvider } from '@/context/DatabaseContext';
 import { useColorScheme } from '@/hooks/useColorScheme';
 
 export default function RootLayout() {
+  return (
+    <AppLayout>
+        <Stack>
+            <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
+            <Stack.Screen name="+not-found" />
+          </Stack>
+        <StatusBar style="auto" />
+    </AppLayout>
+  );
+}
+
+function AppLayout({children}: {children: React.ReactNode}) {
   const colorScheme = useColorScheme();
   const [loaded] = useFonts({
     SpaceMono: require('../assets/fonts/SpaceMono-Regular.ttf'),
@@ -18,12 +31,10 @@ export default function RootLayout() {
   }
 
   return (
-    <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
-      <Stack>
-        <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-        <Stack.Screen name="+not-found" />
-      </Stack>
-      <StatusBar style="auto" />
-    </ThemeProvider>
+    <DatabaseProvider>
+      <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
+        {children}
+      </ThemeProvider>
+    </DatabaseProvider>
   );
 }
