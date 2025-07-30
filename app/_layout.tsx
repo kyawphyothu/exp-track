@@ -10,6 +10,7 @@ import { Stack, useRouter } from "expo-router";
 import { StatusBar } from "expo-status-bar";
 import "react-native-reanimated";
 
+import { GluestackUIProvider } from "@/components/ui/gluestack-ui-provider";
 import { DatabaseProvider } from "@/context/DatabaseContext";
 import { useColorScheme } from "@/hooks/useColorScheme";
 import MaterialIcons from "@expo/vector-icons/MaterialIcons";
@@ -64,9 +65,11 @@ function AppLayout({ children }: { children: React.ReactNode }) {
 
   return (
     <DatabaseProvider>
-      <ThemeProvider value={colorScheme === "dark" ? DarkTheme : DefaultTheme}>
-        {children}
-      </ThemeProvider>
+      <GluestackUIProvider>
+        <ThemeProvider value={colorScheme === "dark" ? DarkTheme : DefaultTheme}>
+          {children}
+        </ThemeProvider>
+      </GluestackUIProvider>
     </DatabaseProvider>
   );
 }
