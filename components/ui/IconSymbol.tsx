@@ -29,6 +29,7 @@ const MAPPING = {
   pencil: "edit",
   trash: "delete",
   plus: "add",
+  "exclamationmark.shield" : "shield"
 } as IconMapping;
 
 /**

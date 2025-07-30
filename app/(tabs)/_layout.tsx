@@ -25,7 +25,7 @@ export default function TabLayout() {
             textAlign: 'center'
           }
           // tabBarStyle: {
-            
+
           // }
           // tabBarStyle: Platform.select({
           //   ios: {
@@ -75,6 +75,15 @@ export default function TabLayout() {
             title: "More",
             tabBarIcon: ({ color }) => (
               <IconSymbol size={28} name="ellipsis" color={color} />
+            ),
+          }}
+          />
+        <Tabs.Screen
+          name="dev"
+          options={{
+            title: "DEV",
+            tabBarIcon: ({ color }) => (
+              <IconSymbol size={28} name="exclamationmark.shield" color={color} />
             ),
           }}
         />
