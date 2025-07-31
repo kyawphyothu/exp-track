@@ -4,7 +4,7 @@ import * as SQLite from 'expo-sqlite';
 import React, { createContext, useContext, useEffect, useState } from 'react';
 import migrations from '../drizzle/migrations';
 
-const expo = SQLite.openDatabaseSync('exp-track.db');
+const expo = SQLite.openDatabaseSync('exp-track.db', { enableChangeListener: true });
 const db = drizzle(expo);
 
 type DatabaseContextType = {

@@ -1,12 +1,39 @@
 import { Image } from 'expo-image';
-import { Platform, StyleSheet } from 'react-native';
+import { Platform, StyleSheet, Text, View } from 'react-native';
 
 import { HelloWave } from '@/components/HelloWave';
 import ParallaxScrollView from '@/components/ParallaxScrollView';
 import { ThemedText } from '@/components/ThemedText';
 import { ThemedView } from '@/components/ThemedView';
+import { useDatabase } from '@/context/DatabaseContext';
+import { currenciesTable } from '@/db/schema';
+import { useLiveQuery } from 'drizzle-orm/expo-sqlite';
+import { useState } from 'react';
 
 export default function HomeScreen() {
+  const { db, isReady, error } = useDatabase();
+  const [loading, setLoading] = useState(false)
+
+  const { data: currencies } = useLiveQuery(db.select().from(currenciesTable))
+
+  if (!isReady) {
+    return (
+      <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+        <Text>Initializing database...</Text>
+      </View>
+    );
+  }
+
+  if (error) {
+    return (
+      <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+        <Text>Database error: {error.message}</Text>
+      </View>
+    );
+  }
+
+
+
   return (
     <ParallaxScrollView
       headerBackgroundColor={{ light: '#A1CEDC', dark: '#1D3D47' }}
@@ -20,6 +47,22 @@ export default function HomeScreen() {
         <ThemedText type="title">Welcome!</ThemedText>
         <HelloWave />
       </ThemedView>
+
+      <ThemedView style={styles.stepContainer}>
+        <ThemedText type="subtitle">Available Currencies</ThemedText>
+        {loading ? (
+          <ThemedText>Loading currencies...</ThemedText>
+        ) : currencies.length > 0 ? (
+          currencies.map((currency) => (
+            <ThemedText key={currency.id}>
+              {currency.name} ({currency.code}) {currency.symbol}
+            </ThemedText>
+          ))
+        ) : (
+          <ThemedText>No currencies found</ThemedText>
+        )}
+      </ThemedView>
+
       <ThemedView style={styles.stepContainer}>
         <ThemedText type="subtitle">Step 1: Try it</ThemedText>
         <ThemedText>
