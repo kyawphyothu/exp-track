@@ -421,9 +421,9 @@ export const currencies = [
   },
   {
     symbol: "MMK",
-    name: "Myanma Kyat",
+    name: "Myanmar Kyat",
     code: "MMK",
-    name_plural: "Myanma kyats",
+    name_plural: "Myanmar kyats",
   },
   {
     symbol: "MOP$",

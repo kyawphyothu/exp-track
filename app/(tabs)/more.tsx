@@ -5,7 +5,7 @@ import React from "react";
 import { Text, View } from "react-native";
 
 const settings = [
-  { title: "currencies", sign: "VND (d)", icon: "coloncurrencysign", href: "" },
+  { title: "currencies", icon: "coloncurrencysign", href: "" },
   { title: "income categories", icon: "coloncurrencysign", href: "" },
   { title: "expense categories", icon: "coloncurrencysign", href: "" },
   { title: "account settings", icon: "coloncurrencysign", href: "" },
@@ -21,12 +21,6 @@ export default function MoreScreen() {
           onPress={() => {
             router.push("/currency-list");
           }}
-          // style={({ pressed }: { pressed: boolean }) => [
-          //   {
-          //     backgroundColor: pressed ? "#0a7ea4" : "#f5f5f5",
-          //     alignItems: "center",
-          //   },
-          // ]}
         >
           {({ pressed }) => (
             <View
@@ -37,9 +31,6 @@ export default function MoreScreen() {
               <IconSymbol name={set.icon} size={22} style={{ margin: 8 }} />
               <View>
                 <Text className="capitalize">{set.title}</Text>
-                {set.sign && (
-                  <Text className="text-red-400 text-sm">{set.sign}</Text>
-                )}
               </View>
             </View>
           )}
