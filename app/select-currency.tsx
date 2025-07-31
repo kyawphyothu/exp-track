@@ -3,21 +3,18 @@ import { Pressable } from "@/components/ui/pressable";
 import { useDatabase } from "@/context/DatabaseContext";
 import { currencies } from "@/data";
 import { currenciesTable, Currency, NewCurrency } from "@/db/schema";
-import { getCurrencies } from "@/libs/actions";
 import MaterialIcons from "@expo/vector-icons/MaterialIcons";
-import React, { useEffect, useState } from "react";
+import { useLiveQuery } from "drizzle-orm/expo-sqlite";
+import React, { useState } from "react";
 import { FlatList, Text, TextInput, View } from "react-native";
 
 export default function SelectCurrency() {
   const { db, isReady, error } = useDatabase();
   const [search, setSearch] = useState("");
-  const [currenciesDB, setCurrenciesDB] = useState<Currency[]>([]);
 
-  useEffect(() => {
-    if (isReady) {
-      getCurrencies(db).then(setCurrenciesDB);
-    }
-  }, [isReady]); //db
+  const { data: currenciesDB } = useLiveQuery(
+    db.select().from(currenciesTable)
+  );
 
   if (!isReady) {
     return (
