@@ -12,6 +12,6 @@ screens
 
 
 
-
+  <IconSymbol name="trash" size={20} color="#e53935" />
 
 
