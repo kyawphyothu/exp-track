@@ -1,32 +1,47 @@
-import { accountsTable, currenciesTable } from "@/db/schema";
 import { eq } from "drizzle-orm";
 
-// Currency
-export const deleteCurrency = async (
-  db: any,
-  code: string,
-  setShowModal: (showModal: boolean) => void
-) => {
+// Create
+export const insertRecord = async (db: any, name: string, table: any) => {
   try {
-    await db.delete(currenciesTable).where(eq(currenciesTable.code, code));
+    await db.insert(table).values({ name });
   } catch (e) {
-    console.error("Error in deleting currency: ", e);
-  } finally {
-    setShowModal(false);
+    console.error("Error in inserting record: ", e);
+    throw e;
   }
 };
 
-// Account
-export const deleteAccount = async (
+// Delete
+export const deleteRecord = async (
   db: any,
-  id: number,
-  setShowModal: (showModal: boolean) => void
+  item: {
+    id: number;
+    name: string;
+    href?: any;
+  },
+  table: any,
+  setShowAlertDialog?: (showModal: boolean) => void
 ) => {
   try {
-    await db.delete(accountsTable).where(eq(accountsTable.id, id));
+    await db.delete(table).where(eq(table.id, item.id));
   } catch (e) {
-    console.error("Error in deleting currency: ", e);
+    console.error("Error in deleting record: ", e);
+    throw e;
   } finally {
-    setShowModal(false);
+    if (setShowAlertDialog) setShowAlertDialog(false);
+  }
+};
+
+// Update
+export const updateRecord = async (
+  db: any,
+  id: number,
+  name: string,
+  table: any
+) => {
+  try {
+    await db.update(table).set({ name }).where(eq(table.id, id));
+  } catch (e) {
+    console.error("Error in updating record: ", e);
+    throw e;
   }
 };

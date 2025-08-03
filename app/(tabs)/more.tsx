@@ -4,11 +4,19 @@ import { useRouter } from "expo-router";
 import React from "react";
 import { Text, View } from "react-native";
 
-const settings = [
-  { title: "currencies", icon: "coloncurrencysign", href: "" },
-  { title: "income categories", icon: "coloncurrencysign", href: "" },
-  { title: "expense categories", icon: "coloncurrencysign", href: "" },
-  { title: "account settings", icon: "coloncurrencysign", href: "" },
+const settings: {
+  title: string;
+  icon: string;
+  href?: "/currency-list" | "/account-settings";
+}[] = [
+  { title: "currencies", icon: "coloncurrencysign", href: "/currency-list" },
+  {
+    title: "account settings",
+    icon: "coloncurrencysign",
+    href: "/account-settings",
+  },
+  { title: "income categories", icon: "coloncurrencysign" },
+  { title: "expense categories", icon: "coloncurrencysign" },
 ];
 
 export default function MoreScreen() {
@@ -19,7 +27,7 @@ export default function MoreScreen() {
         <Pressable
           key={set.title}
           onPress={() => {
-            router.push("/currency-list");
+            if (set.href) router.push(set.href);
           }}
         >
           {({ pressed }) => (

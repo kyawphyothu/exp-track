@@ -46,7 +46,7 @@ export default function AccountsScreen() {
   }
 
   return (
-    <View>
+    <>
       <HStack space="sm" className="justify-between border-b" reversed={false}>
         <Box className="h-20 w-40 flex-col items-center justify-center">
           <Text size="xl">Accounts</Text>
@@ -124,6 +124,6 @@ export default function AccountsScreen() {
           </View>
         )}
       />
-    </View>
+    </>
   );
 }

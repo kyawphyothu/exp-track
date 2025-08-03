@@ -15,7 +15,7 @@ import {
 import { Text } from "@/components/ui/text";
 import { useDatabase } from "@/context/DatabaseContext";
 import { currenciesTable, Currency } from "@/db/schema";
-import { deleteCurrency } from "@/libs/actions";
+import { deleteRecord } from "@/libs/actions";
 import { useLiveQuery } from "drizzle-orm/expo-sqlite";
 import React, { useState } from "react";
 import { FlatList, View } from "react-native";
@@ -106,7 +106,7 @@ export default function CurrencyList() {
                 </Button>
                 <Button
                   onPress={() => {
-                    deleteCurrency(db, item.code, setShowModal);
+                    deleteRecord(db, item.code, setShowModal);
                   }}
                 >
                   <ButtonText>Yes</ButtonText>
