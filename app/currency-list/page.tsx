@@ -92,7 +92,7 @@ export default function CurrencyList() {
   );
 
   return (
-    <View>
+    <ThemedView>
       <TextInput
         value={search}
         onChangeText={setSearch}
@@ -108,6 +108,6 @@ export default function CurrencyList() {
         contentContainerStyle={{ paddingBottom: 100 }}
         className="h-full"
       />
-    </View>
+    </ThemedView>
   );
 }

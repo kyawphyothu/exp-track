@@ -17,7 +17,7 @@ export default function RootLayout() {
     <AppLayout>
       <Stack>
         {/* Tabs */}
-        <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
+        <Stack.Screen name="(tabs)" options={{ headerShown: false, contentStyle: {backgroundColor: "white"} }} />
 
         {/* Currency list */}
         <Stack.Screen
