@@ -16,10 +16,12 @@ import React, { useState } from "react";
 import { IconSymbol } from "./ui/IconSymbol";
 
 const DeleteButton = ({
+  type,
   db,
   item,
   table,
 }: {
+  type?: "currency" | "account";
   db: any;
   item: {
     id: number;
@@ -28,6 +30,7 @@ const DeleteButton = ({
   };
   table: any;
 }) => {
+  
   const [showAlertDialog, setShowAlertDialog] = useState(false);
 
   const handleClose = () => setShowAlertDialog(false);
@@ -46,7 +49,7 @@ const DeleteButton = ({
             <Icon as={TrashIcon} size="lg" className="stroke-error-500" />
           </Box>
           <AlertDialogHeader className="mb-2">
-            <Heading size="md">Delete account?</Heading>
+            <Heading size="md">Delete {type}?</Heading>
           </AlertDialogHeader>
           <AlertDialogBody>
             <Text size="sm" className="text-center">

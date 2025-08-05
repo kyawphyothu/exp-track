@@ -7,9 +7,9 @@ import { Text, View } from "react-native";
 const settings: {
   title: string;
   icon: string;
-  href?: "/currency-list" | "/account-settings";
+  href?: "/currencies" | "/account-settings";
 }[] = [
-  { title: "currencies", icon: "coloncurrencysign", href: "/currency-list" },
+  { title: "currencies", icon: "coloncurrencysign", href: "/currencies" },
   {
     title: "account settings",
     icon: "coloncurrencysign",

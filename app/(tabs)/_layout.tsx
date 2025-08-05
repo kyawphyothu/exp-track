@@ -56,7 +56,7 @@ export default function TabLayout() {
                 size="sm"
                 variant="outline"
                 action="primary"
-                onPress={() => router.push("/add-account")}
+                onPress={() => router.push("/add-account/page")}
               >
                 <MaterialIcons name="add" size={20} color="black" />
               </Button>
@@ -71,6 +71,18 @@ export default function TabLayout() {
             title: "More",
             tabBarIcon: ({ color }) => (
               <IconSymbol size={28} name="ellipsis" color={color} />
+            ),
+            headerTitleAlign: "center",
+          }}
+        />
+
+        {/* Setting */}
+        <Tabs.Screen
+          name="settings"
+          options={{
+            title: "Settings",
+            tabBarIcon: ({ color }) => (
+              <IconSymbol size={28} name="folder.badge.gearshape" color={color} />
             ),
             headerTitleAlign: "center",
           }}
@@ -135,6 +147,44 @@ export default function TabLayout() {
                 variant="outline"
                 action="primary"
                 onPress={() => router.push("/account-category/page")}
+              >
+                <MaterialIcons name="add" size={20} color="black" />
+              </Button>
+            ),
+          }}
+        />
+
+        {/* Currencies */}
+        <Tabs.Screen
+          name="currencies"
+          options={{
+            title: "Currencies",
+            href: null,
+            headerTitleAlign: "center",
+            headerLeft: () => (
+              <Pressable onPress={() => router.push("/currencies")}>
+                {({ pressed }) => (
+                  <View
+                    className={`flex-row items-center bg-slate-200 ${
+                      pressed ? "bg-slate-400" : ""
+                    }`}
+                  >
+                    <MaterialIcons
+                      name="chevron-left"
+                      size={30}
+                      color="black"
+                    />
+                    <Text size="xl">Back</Text>
+                  </View>
+                )}
+              </Pressable>
+            ),
+            headerRight: () => (
+              <Button
+                size="sm"
+                variant="outline"
+                action="primary"
+                onPress={() => router.push("/currency-list/page")}
               >
                 <MaterialIcons name="add" size={20} color="black" />
               </Button>

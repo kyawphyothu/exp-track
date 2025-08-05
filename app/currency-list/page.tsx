@@ -5,10 +5,12 @@ import { currencies } from "@/data";
 import { currenciesTable, Currency, NewCurrency } from "@/db/schema";
 import MaterialIcons from "@expo/vector-icons/MaterialIcons";
 import { useLiveQuery } from "drizzle-orm/expo-sqlite";
+import { useRouter } from "expo-router";
 import React, { useState } from "react";
 import { FlatList, Text, TextInput, View } from "react-native";
 
-export default function SelectCurrency() {
+export default function CurrencyList() {
+  const router = useRouter();
   const { db, isReady, error } = useDatabase();
   const [search, setSearch] = useState("");
 
@@ -42,15 +44,20 @@ export default function SelectCurrency() {
     .sort((a, b) => a.code.localeCompare(b.code));
 
   const addCurrency = async (item: NewCurrency) => {
-    db.insert(currenciesTable).values(item);
+    try {
+      await db.insert(currenciesTable).values(item);
+      router.back();
+    } catch (e) {
+      console.error(e);
+    }
   };
 
-  const CurrencyItem = ({ code, name, symbol }: Omit<Currency, "id">) => (
+  const RenderItem = ({ code, name, symbol }: Omit<Currency, "id">) => (
     <Pressable onPress={() => addCurrency({ code, name, symbol })}>
       {({ pressed }) => (
         <View
-          className={`px-4 py-3 flex-row items-center justify-between border-b ${
-            pressed ? "bg-slate-200" : ""
+          className={`h-16 px-6 flex-row items-center justify-between border-b bg-slate-200 ${
+            pressed ? "bg-slate-400" : ""
           }`}
         >
           <View className="flex-row items-center gap-3">
@@ -96,11 +103,7 @@ export default function SelectCurrency() {
         data={filteredCurrencies}
         keyExtractor={(item) => item.code}
         renderItem={({ item }) => (
-          <CurrencyItem
-            code={item.code}
-            name={item.name}
-            symbol={item.symbol}
-          />
+          <RenderItem code={item.code} name={item.name} symbol={item.symbol} />
         )}
         contentContainerStyle={{ paddingBottom: 100 }}
         className="h-full"

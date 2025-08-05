@@ -3,9 +3,53 @@ import { eq } from "drizzle-orm";
 // Create
 export const insertRecord = async (db: any, name: string, table: any) => {
   try {
+    const existingRecord = await db
+      .select()
+      .from(table)
+      .where(eq(table.name, name))
+      .limit(1);
+    if (existingRecord.length > 0)
+      return {
+        success: false,
+        error: true,
+        message: "This name is already exists",
+      };
+
     await db.insert(table).values({ name });
+
+    return { success: true, error: false };
   } catch (e) {
     console.error("Error in inserting record: ", e);
+    throw e;
+  }
+};
+
+export const insertAccount = async (
+  db: any,
+  name: string,
+  balance: number,
+  categoryId: number,
+  currencyId: number,
+  table: any
+) => {
+  try {
+    const existingAccount = await db
+      .select()
+      .from(table)
+      .where(eq(table.name, name))
+      .limit(1);
+    if (existingAccount.length > 0)
+      return {
+        success: false,
+        error: true,
+        message: "This name is already exists",
+      };
+
+    await db.insert(table).values({ name, balance, categoryId, currencyId });
+
+    return { success: true, error: false };
+  } catch (e) {
+    console.error("Error in inserting account: ", e);
     throw e;
   }
 };

@@ -1,10 +1,10 @@
 import React from 'react'
 import { Text, View } from 'react-native'
 
-export default function Setting() {
+export default function Settins() {
   return (
     <View>
-      <Text>Setting</Text>
+      <Text>Settins</Text>
     </View>
   )
 }

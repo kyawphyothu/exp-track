@@ -1,21 +1,18 @@
-import { Button } from "@/components/ui/button";
 import { GluestackUIProvider } from "@/components/ui/gluestack-ui-provider";
 import { DatabaseProvider } from "@/context/DatabaseContext";
 import "@/global.css";
 import { useColorScheme } from "@/hooks/useColorScheme";
-import MaterialIcons from "@expo/vector-icons/MaterialIcons";
 import {
   DarkTheme,
   DefaultTheme,
   ThemeProvider,
 } from "@react-navigation/native";
 import { useFonts } from "expo-font";
-import { Stack, useRouter } from "expo-router";
+import { Stack } from "expo-router";
 import { StatusBar } from "expo-status-bar";
 import "react-native-reanimated";
 
 export default function RootLayout() {
-  const router = useRouter();
   return (
     <AppLayout>
       <Stack>
@@ -24,45 +21,20 @@ export default function RootLayout() {
 
         {/* Currency list */}
         <Stack.Screen
-          name="currency-list"
+          name="currency-list/page"
           options={{
             title: "Currency Lists",
-            headerRight: () => (
-              <Button
-                size="sm"
-                variant="outline"
-                action="primary"
-                onPress={() => router.push("/select-currency")}
-              >
-                <MaterialIcons name="add" size={20} color="black" />
-              </Button>
-            ),
-          }}
-        />
-
-        {/* Select currency */}
-        <Stack.Screen
-          name="select-currency"
-          options={{
-            title: "Select Currency",
+            headerTitleAlign: "center",
           }}
         />
 
         {/* Add account */}
         <Stack.Screen
-          name="add-account"
+          name="add-account/page"
           options={{
             title: "Add account",
           }}
         />
-
-        {/* Account setting */}
-        {/* <Stack.Screen
-          name="account-settings"
-          options={{
-            title: "Account Settings",
-          }}
-        /> */}
 
         {/* Account category */}
         <Stack.Screen
@@ -73,7 +45,7 @@ export default function RootLayout() {
           }}
         />
 
-        {/* Account category with ID */}
+        {/* Account category by ID */}
         <Stack.Screen
           name="account-category/[id]/page"
           options={{
