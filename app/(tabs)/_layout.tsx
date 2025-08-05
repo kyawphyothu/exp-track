@@ -13,13 +13,14 @@ import { Colors } from "@/constants/Colors";
 import { useColorScheme } from "@/hooks/useColorScheme";
 import MaterialIcons from "@expo/vector-icons/MaterialIcons";
 import { View } from "react-native";
+import { SafeAreaView } from "react-native-safe-area-context";
 
 export default function TabLayout() {
   const colorScheme = useColorScheme();
   const router = useRouter();
 
   return (
-    <View className="flex-1">
+    <SafeAreaView className="flex-1">
       <Tabs
         screenOptions={{
           tabBarActiveTintColor: Colors[colorScheme ?? "light"].tint,
@@ -29,6 +30,9 @@ export default function TabLayout() {
           tabBarLabelStyle: {
             textAlign: "center",
           },
+          tabBarStyle: {
+            elevation: 0
+          }
         }}
       >
         {/* Home */}
@@ -218,6 +222,6 @@ export default function TabLayout() {
       >
         <FabIcon className="color-white" size="xl" as={AddIcon} />
       </Fab>
-    </View>
+    </SafeAreaView>
   );
 }
