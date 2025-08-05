@@ -1,48 +1,60 @@
-import { Button } from "@/components/ui/button";
+import { GluestackUIProvider } from "@/components/ui/gluestack-ui-provider";
+import { DatabaseProvider } from "@/context/DatabaseContext";
 import "@/global.css";
+import { useColorScheme } from "@/hooks/useColorScheme";
 import {
   DarkTheme,
   DefaultTheme,
   ThemeProvider,
 } from "@react-navigation/native";
 import { useFonts } from "expo-font";
-import { Stack, useRouter } from "expo-router";
+import { Stack } from "expo-router";
 import { StatusBar } from "expo-status-bar";
 import "react-native-reanimated";
 
-import { GluestackUIProvider } from "@/components/ui/gluestack-ui-provider";
-import { DatabaseProvider } from "@/context/DatabaseContext";
-import { useColorScheme } from "@/hooks/useColorScheme";
-import MaterialIcons from "@expo/vector-icons/MaterialIcons";
-
 export default function RootLayout() {
-  const router = useRouter();
   return (
     <AppLayout>
       <Stack>
+        {/* Tabs */}
         <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
+
+        {/* Currency list */}
         <Stack.Screen
-          name="currency-list"
+          name="currency-list/page"
           options={{
             title: "Currency Lists",
-            headerRight: () => (
-              <Button
-                size="sm"
-                variant="outline"
-                action="primary"
-                onPress={() => router.push("/select-currency")}
-              >
-                <MaterialIcons name="add" size={20} color="black" />
-              </Button>
-            ),
+            headerTitleAlign: "center",
           }}
         />
+
+        {/* Add account */}
         <Stack.Screen
-          name="select-currency"
+          name="add-account/page"
           options={{
-            title: "Select Currency",
+            title: "Add account",
           }}
         />
+
+        {/* Account category */}
+        <Stack.Screen
+          name="account-category/page"
+          options={{
+            title: "Account Category",
+            contentStyle: { padding: 20 },
+          }}
+        />
+
+        {/* Account category by ID */}
+        <Stack.Screen
+          name="account-category/[id]/page"
+          options={{
+            title: "Account Category",
+            contentStyle: { padding: 20 },
+          }}
+        />
+
+        {/* 404 */}
         <Stack.Screen name="+not-found" />
       </Stack>
       <StatusBar style="auto" />
@@ -66,7 +78,9 @@ function AppLayout({ children }: { children: React.ReactNode }) {
   return (
     <DatabaseProvider>
       <GluestackUIProvider>
-        <ThemeProvider value={colorScheme === "dark" ? DarkTheme : DefaultTheme}>
+        <ThemeProvider
+          value={colorScheme === "dark" ? DarkTheme : DefaultTheme}
+        >
           {children}
         </ThemeProvider>
       </GluestackUIProvider>

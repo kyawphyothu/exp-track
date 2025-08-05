@@ -1,20 +1,25 @@
-import { Tabs } from "expo-router";
+import { Tabs, useRouter } from "expo-router";
 import React from "react";
-import { View } from "react-native";
 
 import { HapticTab } from "@/components/HapticTab";
+import { Button } from "@/components/ui/button";
 import { Fab, FabIcon } from "@/components/ui/fab";
 import { AddIcon } from "@/components/ui/icon";
 import { IconSymbol } from "@/components/ui/IconSymbol";
+import { Pressable } from "@/components/ui/pressable";
 import TabBarBackground from "@/components/ui/TabBarBackground";
+import { Text } from "@/components/ui/text";
 import { Colors } from "@/constants/Colors";
 import { useColorScheme } from "@/hooks/useColorScheme";
+import MaterialIcons from "@expo/vector-icons/MaterialIcons";
+import { View } from "react-native";
 
 export default function TabLayout() {
   const colorScheme = useColorScheme();
+  const router = useRouter();
 
   return (
-    <View style={{ flex: 1 }}>
+    <View className="flex-1">
       <Tabs
         screenOptions={{
           tabBarActiveTintColor: Colors[colorScheme ?? "light"].tint,
@@ -22,23 +27,11 @@ export default function TabLayout() {
           tabBarButton: HapticTab,
           tabBarBackground: TabBarBackground,
           tabBarLabelStyle: {
-            textAlign: 'center'
-          }
-          // tabBarStyle: {
-
-          // }
-          // tabBarStyle: Platform.select({
-          //   ios: {
-          //     position: "absolute",
-          //   },
-          //   default: {},
-          //   android: {
-          //     textAlign: "center"
-          //   }
-          // }),
+            textAlign: "center",
+          },
         }}
       >
-        {/* Left: Home */}
+        {/* Home */}
         <Tabs.Screen
           name="index"
           options={{
@@ -48,17 +41,8 @@ export default function TabLayout() {
             ),
           }}
         />
-        {/* Middle: Plus */}
-        {/* <Tabs.Screen
-          name="entry"
-          options={{
-            title: "Add",
-            tabBarIcon: ({ color }) => (
-              <IconSymbol size={36} name="plus.circle.fill" color={color} />
-            ),
-          }}
-        /> */}
-        {/* Right: Account */}
+
+        {/* Account */}
         <Tabs.Screen
           name="accounts"
           options={{
@@ -66,9 +50,21 @@ export default function TabLayout() {
             tabBarIcon: ({ color }) => (
               <IconSymbol size={28} name="creditcard" color={color} />
             ),
+            headerTitleAlign: "center",
+            headerRight: () => (
+              <Button
+                size="sm"
+                variant="outline"
+                action="primary"
+                onPress={() => router.push("/add-account/page")}
+              >
+                <MaterialIcons name="add" size={20} color="black" />
+              </Button>
+            ),
           }}
         />
-        {/* Right: More */}
+
+        {/* More */}
         <Tabs.Screen
           name="more"
           options={{
@@ -76,14 +72,137 @@ export default function TabLayout() {
             tabBarIcon: ({ color }) => (
               <IconSymbol size={28} name="ellipsis" color={color} />
             ),
+            headerTitleAlign: "center",
           }}
-          />
+        />
+
+        {/* Setting */}
+        <Tabs.Screen
+          name="settings"
+          options={{
+            title: "Settings",
+            tabBarIcon: ({ color }) => (
+              <IconSymbol size={28} name="folder.badge.gearshape" color={color} />
+            ),
+            headerTitleAlign: "center",
+          }}
+        />
+
+        {/* Account Settings */}
+        <Tabs.Screen
+          name="account-settings"
+          options={{
+            title: "Account Settings",
+            href: null,
+            headerTitleAlign: "center",
+            headerLeft: () => (
+              <Pressable onPress={() => router.push("/more")}>
+                {({ pressed }) => (
+                  <View
+                    className={`flex-row items-center bg-slate-200 ${
+                      pressed ? "bg-slate-400" : ""
+                    }`}
+                  >
+                    <MaterialIcons
+                      name="chevron-left"
+                      size={30}
+                      color="black"
+                    />
+                    <Text size="xl">More</Text>
+                  </View>
+                )}
+              </Pressable>
+            ),
+          }}
+        />
+
+        {/* Account categories */}
+        <Tabs.Screen
+          name="account-categories"
+          options={{
+            title: "Account Categories",
+            href: null,
+            headerTitleAlign: "center",
+            headerLeft: () => (
+              <Pressable onPress={() => router.push("/account-settings")}>
+                {({ pressed }) => (
+                  <View
+                    className={`flex-row items-center bg-slate-200 ${
+                      pressed ? "bg-slate-400" : ""
+                    }`}
+                  >
+                    <MaterialIcons
+                      name="chevron-left"
+                      size={30}
+                      color="black"
+                    />
+                    <Text size="xl">Back</Text>
+                  </View>
+                )}
+              </Pressable>
+            ),
+            headerRight: () => (
+              <Button
+                size="sm"
+                variant="outline"
+                action="primary"
+                onPress={() => router.push("/account-category/page")}
+              >
+                <MaterialIcons name="add" size={20} color="black" />
+              </Button>
+            ),
+          }}
+        />
+
+        {/* Currencies */}
+        <Tabs.Screen
+          name="currencies"
+          options={{
+            title: "Currencies",
+            href: null,
+            headerTitleAlign: "center",
+            headerLeft: () => (
+              <Pressable onPress={() => router.push("/currencies")}>
+                {({ pressed }) => (
+                  <View
+                    className={`flex-row items-center bg-slate-200 ${
+                      pressed ? "bg-slate-400" : ""
+                    }`}
+                  >
+                    <MaterialIcons
+                      name="chevron-left"
+                      size={30}
+                      color="black"
+                    />
+                    <Text size="xl">Back</Text>
+                  </View>
+                )}
+              </Pressable>
+            ),
+            headerRight: () => (
+              <Button
+                size="sm"
+                variant="outline"
+                action="primary"
+                onPress={() => router.push("/currency-list/page")}
+              >
+                <MaterialIcons name="add" size={20} color="black" />
+              </Button>
+            ),
+          }}
+        />
+
+        {/* Dev */}
         <Tabs.Screen
           name="dev"
           options={{
             title: "DEV",
             tabBarIcon: ({ color }) => (
-              <IconSymbol size={28} name="exclamationmark.shield" color={color} />
+              <IconSymbol
+                size={28}
+                name="exclamationmark.shield"
+                color={color}
+              />
             ),
           }}
         />
@@ -99,7 +218,6 @@ export default function TabLayout() {
       >
         <FabIcon className="color-white" size="xl" as={AddIcon} />
       </Fab>
-      {/* </Box> */}
     </View>
   );
 }
